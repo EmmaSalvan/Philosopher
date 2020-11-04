@@ -22,9 +22,24 @@ public class Philosopher
 
     @Override
     public void run() {
-
+        while (running){
+            try {	
+                // tant qu'il ne quitte pas la table
+                think();
+                // Prendre les 2 baguettes
+                myLeftStick.take();
+                myRightStick.take();
+                //Il peut manger
+                eat();
+                //Il relache les baguettes
+                myLeftStick.release();
+                myRightStick.release();
+                }
+            catch (InterruptedException ex) {
+		break; // Sort du while, termine le Thread;
+            }
+        }
     }
-
     // Permet d'interrompre le philosophe "proprement" :
     // Il doit relâcher ses baguettes avant de s'arrêter
     public void leaveTable() {
